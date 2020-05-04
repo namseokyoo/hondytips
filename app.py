@@ -69,4 +69,4 @@ def unlike():
     return jsonify({'result':'success', 'msg':'unlike'})
 
 if __name__ == "__main__":
-    app.run('localhost', port=5001, debug=True)
+    app.run('0.0.0.0', port=5001, debug=True)

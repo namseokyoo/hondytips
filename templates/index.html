@@ -69,7 +69,7 @@
                 },
                 success: function (response) {
                     let msg = response.msg
-                    alert(msg)
+                    // alert(msg)
                 }
             })
             $("#input_text").val('')
@@ -84,61 +84,64 @@
                 url: '/load_tips',
                 data: {},
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     let tip = response['tips'];
                     for (i = 0; i < tip.length; i++) {
                         let tips = response.tips[i];
-                        console.log(tips['expiration']);
-                        console.log(tips['tip']);
-                        console.log(tips['_id']);
+                        // console.log(tips['sid']);
+                        // console.log(tips['expiration']);
+                        // console.log(tips['tip']);
                         makeTipsList(
-                            tips['tip']
+                            tips['tip'],
+                            tips['sid'],
+                            tips['like'],
+                            tips['unlike']
                         );
                     }
                 }
             })
         }
 
-        function makeTipsList(tips) {
+        function makeTipsList(tips, sid,like, unlike) {
             const tipLists = `<li class="list-group-item d-flex justify-content-between align-items-center">
                 <div class="tip-content">
             ${tips}
             </div>
-            <span class="badge badge-primary badge-pill" onclick="like(); return false;" style="cursor: pointer">&#x1F44D;&nbsp 0</span>
-            <span class="badge badge-primary badge-pill" onclick="unlike(); return false;" style="cursor: pointer">&#x1F44E;&nbsp 0</span>
+            <span class="badge badge-primary badge-pill" onclick="like('${sid}'); return false;" style="cursor: pointer">&#x1F44D;&nbsp ${like}</span>
+            <span class="badge badge-primary badge-pill" onclick="unlike('${sid}'); return false;" style="cursor: pointer">&#x1F44E;&nbsp ${unlike}</span>
         </li>`
 
             $('#tip_list_group').prepend(tipLists)
         }
 
-        function like(){
+        function like(sid) {
+            
             $.ajax({
-                type:'POST',
-                url:'/like',
-                date:{
-                    like
+                type: 'POST',
+                url: '/like',
+                data:{
+                    sid
                 },
-                success:function(response){
-                    console.log("like")
+                success: function (response) {
                     loadTipsList()
                 }
             })
-            
+
         }
 
-        function unlike(){
+        function unlike(sid) {
+            
             $.ajax({
-                type:'POST',
-                url:'/unlike',
-                date:{
-                    unlike
+                type: 'POST',
+                url: '/unlike',
+                data:{
+                    sid
                 },
-                success:function(response){
-                    console.log("unlike")
+                success: function (response) {
                     loadTipsList()
                 }
             })
-            
+
         }
     </script>
 </body>

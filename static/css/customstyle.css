@@ -1,0 +1,25 @@
+.content-wrap {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.thumbnail-wrappper {
+    width: 20%;
+}
+
+
+.tip-content{
+    width:85%;
+}
+
+.logo_img {
+    max-width: 100%;
+    height: auto;
+}

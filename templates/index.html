@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/images/favicon.png">
+    <title>꿀팁!</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/customstyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="content-wrap">
+        <div class="thumbnail-wrappper">
+            <a target="_blank" href="/index.html"><img class="logo_img" src="/static/images/logo.png"></a>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="input_text" placeholder="여러분의 꿀팁을 50자 이내로 알려주세요!"
+                aria-label="Recipient's username" aria-describedby="button-addon2" onkeyup="enterkey()" maxlength="50">
+        </div>
+
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="writeTipsList()">꿀팁!</button>
+
+
+        <!-- 꿀팁 리스트 -->
+        <ul class="list-group" id="tip_list_group">
+            <!-- listing space -->
+        </ul>
+        <!-- 꿀팁 리스트 -->
+    </div>
+
+
+    <script>
+        // 엔터키 눌렀을때 이벤트 발생하게 하는 함수
+        function enterkey() {
+            if (window.event.keyCode == 13) {
+                // 엔터키가 눌렸을 때 실행할 내용
+                writeTipsList();
+            }
+        }
+
+        $(document).ready(function () {
+            emptylist();
+            loadTipsList();
+        })
+
+        function emptylist() {
+            $('#tip_list_group').empty();
+        }
+
+        $(document).ready(function () {
+            $('#input_text').keyup(function () {
+                if ($(this).val().length > $(this).attr('maxlength')) {
+                    alert('제한길이 초과'); $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+                }
+            });
+        });
+
+        function writeTipsList() {
+            const tips = $("#input_text").val()
+            $.ajax({
+                type: 'POST',
+                url: '/write_tips',
+                data: {
+                    tips
+                },
+                success: function (response) {
+                    let msg = response.msg
+                    alert(msg)
+                }
+            })
+            $("#input_text").val('')
+            loadTipsList()
+
+        }
+
+        function loadTipsList() {
+            emptylist()
+            $.ajax({
+                type: 'GET',
+                url: '/load_tips',
+                data: {},
+                success: function (response) {
+                    console.log(response);
+                    let tip = response['tips'];
+                    for (i = 0; i < tip.length; i++) {
+                        let tips = response.tips[i];
+                        console.log(tips['expiration']);
+                        console.log(tips['tip']);
+                        console.log(tips['_id']);
+                        makeTipsList(
+                            tips['tip']
+                        );
+                    }
+                }
+            })
+        }
+
+        function makeTipsList(tips) {
+            const tipLists = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="tip-content">
+            ${tips}
+            </div>
+            <span class="badge badge-primary badge-pill" onclick="like(); return false;" style="cursor: pointer">&#x1F44D;&nbsp 0</span>
+            <span class="badge badge-primary badge-pill" onclick="unlike(); return false;" style="cursor: pointer">&#x1F44E;&nbsp 0</span>
+        </li>`
+
+            $('#tip_list_group').prepend(tipLists)
+        }
+
+        function like(){
+            $.ajax({
+                type:'POST',
+                url:'/like',
+                date:{
+                    like
+                },
+                success:function(response){
+                    console.log("like")
+                    loadTipsList()
+                }
+            })
+            
+        }
+
+        function unlike(){
+            $.ajax({
+                type:'POST',
+                url:'/unlike',
+                date:{
+                    unlike
+                },
+                success:function(response){
+                    console.log("unlike")
+                    loadTipsList()
+                }
+            })
+            
+        }
+    </script>
+</body>
+
+</html>

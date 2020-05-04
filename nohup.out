@@ -1,0 +1,267 @@
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 221-597-052
+124.49.105.89 - - [04/May/2020 22:05:06] "[37mGET / HTTP/1.1[0m" 200 -
+124.49.105.89 - - [04/May/2020 22:05:06] "[37mGET /static/images/favicon.png HTTP/1.1[0m" 200 -
+124.49.105.89 - - [04/May/2020 22:05:09] "[37mGET / HTTP/1.1[0m" 200 -
+124.49.105.89 - - [04/May/2020 22:05:36] "[35m[1mGET /load_tips HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2464, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2450, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1867, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/hondytips/app.py", line 49, in load_tips
+    tips = list(db.tip.find({},{'_id':0}))
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/cursor.py", line 1156, in next
+    if len(self.__data) or self._refresh():
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/cursor.py", line 1050, in _refresh
+    self.__session = self.__collection.database.client._ensure_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1810, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1763, in __start_session
+    server_session = self._get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1796, in _get_server_session
+    return self._topology.get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 485, in get_server_session
+    None)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 209, in _select_servers_loop
+    self._error_message(selector))
+pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 111] Connection refused
+124.49.105.89 - - [04/May/2020 22:05:40] "[35m[1mGET /load_tips HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2464, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2450, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1867, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/hondytips/app.py", line 49, in load_tips
+    tips = list(db.tip.find({},{'_id':0}))
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/cursor.py", line 1156, in next
+    if len(self.__data) or self._refresh():
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/cursor.py", line 1050, in _refresh
+    self.__session = self.__collection.database.client._ensure_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1810, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1763, in __start_session
+    server_session = self._get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1796, in _get_server_session
+    return self._topology.get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 485, in get_server_session
+    None)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 209, in _select_servers_loop
+    self._error_message(selector))
+pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 111] Connection refused
+124.49.105.89 - - [04/May/2020 22:20:55] "[37mGET / HTTP/1.1[0m" 200 -
+124.49.105.89 - - [04/May/2020 22:20:55] "[37mGET /static/images/favicon.png HTTP/1.1[0m" 200 -
+124.49.105.89 - - [04/May/2020 22:21:03] "[33mGET /static/js/bootstrap.min.js.map HTTP/1.1[0m" 404 -
+124.49.105.89 - - [04/May/2020 22:21:03] "[33mGET /static/css/bootstrap.css.map HTTP/1.1[0m" 404 -
+124.49.105.89 - - [04/May/2020 22:21:26] "[35m[1mGET /load_tips HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2464, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2450, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1867, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/hondytips/app.py", line 49, in load_tips
+    tips = list(db.tip.find({},{'_id':0}))
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/cursor.py", line 1156, in next
+    if len(self.__data) or self._refresh():
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/cursor.py", line 1050, in _refresh
+    self.__session = self.__collection.database.client._ensure_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1810, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1763, in __start_session
+    server_session = self._get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1796, in _get_server_session
+    return self._topology.get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 485, in get_server_session
+    None)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 209, in _select_servers_loop
+    self._error_message(selector))
+pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 111] Connection refused
+124.49.105.89 - - [04/May/2020 22:21:31] "[35m[1mPOST /write_tips HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2464, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2450, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1867, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/hondytips/app.py", line 44, in write_tips
+    db.tip.insert_one(tips)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/collection.py", line 698, in insert_one
+    session=session),
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/collection.py", line 612, in _insert
+    bypass_doc_val, session)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/collection.py", line 600, in _insert_one
+    acknowledged, _insert_command, session)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1490, in _retryable_write
+    with self._tmp_session(session) as s:
+  File "/usr/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1823, in _tmp_session
+    s = self._ensure_session(session)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1810, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1763, in __start_session
+    server_session = self._get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1796, in _get_server_session
+    return self._topology.get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 485, in get_server_session
+    None)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 209, in _select_servers_loop
+    self._error_message(selector))
+pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 111] Connection refused
+124.49.105.89 - - [04/May/2020 22:21:37] "[35m[1mGET /load_tips HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2464, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2450, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1867, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/hondytips/app.py", line 49, in load_tips
+    tips = list(db.tip.find({},{'_id':0}))
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/cursor.py", line 1156, in next
+    if len(self.__data) or self._refresh():
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/cursor.py", line 1050, in _refresh
+    self.__session = self.__collection.database.client._ensure_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1810, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1763, in __start_session
+    server_session = self._get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1796, in _get_server_session
+    return self._topology.get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 485, in get_server_session
+    None)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 209, in _select_servers_loop
+    self._error_message(selector))
+pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 111] Connection refused
+124.49.105.89 - - [04/May/2020 22:21:37] "[35m[1mPOST /write_tips HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2464, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2450, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1867, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/hondytips/app.py", line 44, in write_tips
+    db.tip.insert_one(tips)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/collection.py", line 698, in insert_one
+    session=session),
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/collection.py", line 612, in _insert
+    bypass_doc_val, session)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/collection.py", line 600, in _insert_one
+    acknowledged, _insert_command, session)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1490, in _retryable_write
+    with self._tmp_session(session) as s:
+  File "/usr/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1823, in _tmp_session
+    s = self._ensure_session(session)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1810, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1763, in __start_session
+    server_session = self._get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1796, in _get_server_session
+    return self._topology.get_server_session()
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 485, in get_server_session
+    None)
+  File "/home/ubuntu/hondytips/.venv/lib/python3.6/site-packages/pymongo/topology.py", line 209, in _select_servers_loop
+    self._error_message(selector))
+pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 111] Connection refused
+124.49.105.89 - - [04/May/2020 22:21:51] "[35m[1mGET /load_tips HTTP/1.1[0m" 500 -

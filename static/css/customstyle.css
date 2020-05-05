@@ -10,6 +10,10 @@
 
 }
 
+.thumb {
+    display: inline-block;
+}
+
 .thumbnail-wrappper {
     width: 20%;
 }

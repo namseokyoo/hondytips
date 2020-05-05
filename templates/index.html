@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/static/images/favicon.png">
     <title>꿀팁!</title>
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/css/customstyle.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/customstyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    {% include 'header.html' %}
     <div class="content-wrap">
         <div class="thumbnail-wrappper">
             <a href="/"><img class="logo_img" src="/static/images/logo.png"></a>
@@ -32,7 +34,7 @@
         <!-- 꿀팁 리스트 -->
     </div>
 
-
+  
     <script>
         // 엔터키 눌렀을때 이벤트 발생하게 하는 함수
         function enterkey() {
@@ -116,8 +118,8 @@
                 <div class="tip-content">
             ${tips}
             </div>
-            <span class="badge badge-primary badge-pill" onclick="like('${sid}'); return false;" style="cursor: pointer">&#x1F44D;&nbsp <div id="like_${sid}">${like}</div></span>
-            <span class="badge badge-primary badge-pill" onclick="unlike('${sid}'); return false;" style="cursor: pointer">&#x1F44E;&nbsp <div id="unlike_${sid}">${unlike}</div></span>
+            <span class="badge badge-primary badge-pill" onclick="like('${sid}'); return false;" style="cursor: pointer">&#x1F44D; <div class="thumb" id="like_${sid}">${like}</div></span>
+            <span class="badge badge-primary badge-pill" onclick="unlike('${sid}'); return false;" style="cursor: pointer">&#x1F44E; <div class="thumb" id="unlike_${sid}">${unlike}</div></span>
         </li>`
 
             $('#tip_list_group').prepend(tipLists)
@@ -155,6 +157,7 @@
 
         }
     </script>
+
 </body>
 
 </html>

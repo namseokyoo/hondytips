@@ -15,7 +15,7 @@
 <body>
     <div class="content-wrap">
         <div class="thumbnail-wrappper">
-            <a target="_blank" href="/index.html"><img class="logo_img" src="/static/images/logo.png"></a>
+            <a href="/"><img class="logo_img" src="/static/images/logo.png"></a>
         </div>
         <div class="input-group mb-3">
             <input type="text" class="form-control" id="input_text" placeholder="여러분의 꿀팁을 50자 이내로 알려주세요!"
@@ -43,7 +43,7 @@
         }
 
         $(document).ready(function () {
-            emptylist();
+            // emptylist();
             loadTipsList();
         })
 
@@ -61,20 +61,29 @@
 
         function writeTipsList() {
             const tips = $("#input_text").val()
-            $.ajax({
-                type: 'POST',
-                url: '/write_tips',
-                data: {
-                    tips
-                },
-                success: function (response) {
-                    let msg = response.msg
-                    // alert(msg)
-                }
-            })
-            $("#input_text").val('')
-            loadTipsList()
+            if (tips == "") {
+                alert('꿀팁을 입력해주세요!')
+            } else {
 
+                $.ajax({
+                    type: 'POST',
+                    url: '/write_tips',
+                    data: {
+                        tips
+                    },
+                    success: function (response) {
+                        let msg = response.msg
+                        // alert(msg)
+                    }
+                })
+                $("#input_text").val('')
+                loadTipsList()
+            };
+
+        }
+
+        function Refresh_btn(sid, btn) {
+            $('#'+sid).text(btn);
         }
 
         function loadTipsList() {
@@ -102,27 +111,29 @@
             })
         }
 
-        function makeTipsList(tips, sid,like, unlike) {
+        function makeTipsList(tips, sid, like, unlike) {
             const tipLists = `<li class="list-group-item d-flex justify-content-between align-items-center">
                 <div class="tip-content">
             ${tips}
             </div>
-            <span class="badge badge-primary badge-pill" onclick="like('${sid}'); return false;" style="cursor: pointer">&#x1F44D;&nbsp ${like}</span>
-            <span class="badge badge-primary badge-pill" onclick="unlike('${sid}'); return false;" style="cursor: pointer">&#x1F44E;&nbsp ${unlike}</span>
+            <span class="badge badge-primary badge-pill" onclick="like('${sid}'); return false;" style="cursor: pointer">&#x1F44D;&nbsp <div id="like_${sid}">${like}</div></span>
+            <span class="badge badge-primary badge-pill" onclick="unlike('${sid}'); return false;" style="cursor: pointer">&#x1F44E;&nbsp <div id="unlike_${sid}">${unlike}</div></span>
         </li>`
 
             $('#tip_list_group').prepend(tipLists)
         }
 
         function like(sid) {
-            
+
             $.ajax({
                 type: 'POST',
                 url: '/like',
-                data:{
+                data: {
                     sid
                 },
                 success: function (response) {
+                    let tip = response['tips'];
+                    // Refresh_btn(tip['sid'],tip['like'])
                     loadTipsList()
                 }
             })
@@ -130,11 +141,11 @@
         }
 
         function unlike(sid) {
-            
+
             $.ajax({
                 type: 'POST',
                 url: '/unlike',
-                data:{
+                data: {
                     sid
                 },
                 success: function (response) {

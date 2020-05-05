@@ -43,7 +43,7 @@ def welcom():
 @app.route('/write_tips', methods=['POST'])
 def write_tips():
     tip = request.form['tips']
-    expiration = datetime.utcnow() + timedelta(minutes=10)
+    expiration = datetime.utcnow() + timedelta(hours=24)
     sid = str(uuid4())
     tips = {
         'sid': sid,
@@ -72,7 +72,8 @@ def like():
     # print(sid)
     # likevalue = db.tip.find_one({'sid':sid})
     db.tip.update({'sid': sid}, {'$inc': {'like': 1}})
-    return jsonify({'result': 'success', 'msg': 'like'})
+    tips = list(db.tip.find({'sid':sid}, {'_id': 0}))
+    return jsonify({'result': 'success', 'msg': 'like','tips':tips})
     # new_like = likevalue['like']+1
     # db.tip.update_one({'sid': sid},{'$set':{'like': new_like}})
 

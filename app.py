@@ -10,6 +10,9 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
+
+# HOST = 'localhost'
+# client = MongoClient(HOST,27017)
 HOST = os.getenv('HOST', '0.0.0.0')
 USERNAME = os.getenv('USERNAME')
 PASSWORD = os.getenv('PASSWORD')
@@ -23,7 +26,6 @@ client = MongoClient(HOST,
 
 
 db = client.honeytips
-
 
 app = Flask(__name__)
 
@@ -53,6 +55,7 @@ def write_tips():
         'unlike': 0
 
     }
+    print(tips)
     db.tip.insert_one(tips)
     return jsonify({'result': 'success', 'msg': '꿀팁!'})
 
@@ -86,4 +89,4 @@ def unlike():
 
 
 if __name__ == "__main__":
-    app.run('0.0.0.0', port=80, debug=True)
+    app.run(host='localhost', port=5000, debug='Ture')

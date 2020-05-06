@@ -16,16 +16,31 @@
 <body>
     {% include 'header.html' %}
     <div class="content-wrap">
-        <div class="thumbnail-wrappper">
-            <a href="/"><img class="logo_img" src="/static/images/logo.png"></a>
-        </div>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" id="input_text" placeholder="여러분의 꿀팁을 50자 이내로 알려주세요!"
-                aria-label="Recipient's username" aria-describedby="button-addon2" onkeyup="enterkey()" maxlength="50">
-        </div>
+        <!-- <div class='top'> -->
+            <div class="thumbnail-wrappper">
+                <a href="/"><img class="logo_img" src="/static/images/logo.png"></a>
+            </div>
+            <ul class="notice-list">
+                <li>
+                    50글자로 여러분만의 꿀팁을 여러 사람들에게 공유해보세요
+                </li>
+                <li>
+                    올려주신 꿀팁은 24시간 후 자동으로 삭제 됩니다
+                </li>
+                <li>
+                    추가 기능을 개발중입니다
+                </li>
+            </ul>
+        <!-- </div> -->
+        <div class="input-box">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="input_text" placeholder="여러분의 꿀팁을 50자 이내로 알려주세요!"
+                    aria-label="Recipient's username" aria-describedby="button-addon2" onkeyup="enterkey()"
+                    maxlength="50">
+            </div>
 
-        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="writeTipsList()">꿀팁!</button>
-
+            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="writeTipsList()">꿀팁!</button>
+        </div>
 
         <!-- 꿀팁 리스트 -->
         <ul class="list-group" id="tip_list_group">
@@ -34,7 +49,7 @@
         <!-- 꿀팁 리스트 -->
     </div>
 
-  
+
     <script>
         // 엔터키 눌렀을때 이벤트 발생하게 하는 함수
         function enterkey() {
@@ -85,7 +100,7 @@
         }
 
         function Refresh_btn(sid, btn) {
-            $('#'+sid).text(btn);
+            $('#' + sid).text(btn);
         }
 
         function loadTipsList() {

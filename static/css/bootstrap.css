@@ -3234,8 +3234,9 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 .input-group>.form-control, .input-group>.form-control-plaintext, .input-group>.custom-select, .input-group>.custom-file {
     position: relative;
     -ms-flex: 1 1 auto;
+    float: left;
     flex: 1 1 auto;
-    width: 1%;
+    /* width: 1%; */
     margin-bottom: 0;
 }
 

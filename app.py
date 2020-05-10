@@ -1,5 +1,6 @@
 import os
 import json
+import pytz
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
 from datetime import datetime, timedelta
@@ -12,7 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # HOST = 'localhost'
-# client = MongoClient(HOST,27017)
+# client = MongoClient(HOST, 27017)
 HOST = os.getenv('HOST', '0.0.0.0')
 USERNAME = os.getenv('USERNAME')
 PASSWORD = os.getenv('PASSWORD')
@@ -30,13 +31,6 @@ db = client.honeytips
 app = Flask(__name__)
 
 
-# class JSONEncoder(json.JSONEncoder):
-#     def default(self, o):
-#         if isinstance(o, ObjectId):
-#             return str(o)
-#         return json.JSONEncoder.default(self, o)
-
-
 @app.route('/')
 def welcom():
     return render_template('index.html')
@@ -45,7 +39,7 @@ def welcom():
 @app.route('/write_tips', methods=['POST'])
 def write_tips():
     tip = request.form['tips']
-    expiration = datetime.utcnow() + timedelta(hours=24)
+    expiration = datetime.now(tz=pytz.utc) + timedelta(hours=24)
     sid = str(uuid4())
     tips = {
         'sid': sid,
@@ -53,9 +47,7 @@ def write_tips():
         'expiration': expiration,
         'like': 0,
         'unlike': 0
-
     }
-    print(tips)
     db.tip.insert_one(tips)
     return jsonify({'result': 'success', 'msg': '꿀팁!'})
 
@@ -63,9 +55,6 @@ def write_tips():
 @app.route('/load_tips', methods=['GET'])
 def load_tips():
     tips = list(db.tip.find({}, {'_id': 0}))
-    # jsontips = json.dumps(tips)
-    # tip = JSONEncoder().encode(tips)
-    # print(tip)
     return jsonify({'result': 'success', 'tips': tips})
 
 
@@ -75,8 +64,8 @@ def like():
     # print(sid)
     # likevalue = db.tip.find_one({'sid':sid})
     db.tip.update({'sid': sid}, {'$inc': {'like': 1}})
-    tips = list(db.tip.find({'sid':sid}, {'_id': 0}))
-    return jsonify({'result': 'success', 'msg': 'like','tips':tips})
+    tips = list(db.tip.find({'sid': sid}, {'_id': 0}))
+    return jsonify({'result': 'success', 'msg': 'like', 'tips': tips})
     # new_like = likevalue['like']+1
     # db.tip.update_one({'sid': sid},{'$set':{'like': new_like}})
 

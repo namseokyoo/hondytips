@@ -63,6 +63,7 @@ def like():
     sid = request.form['sid']
     # print(sid)
     # likevalue = db.tip.find_one({'sid':sid})
+    db.tip.update({'sid':sid},{'$inc':{'expiration':timedelta(minutes=10)}})
     db.tip.update({'sid': sid}, {'$inc': {'like': 1}})
     tips = list(db.tip.find({'sid': sid}, {'_id': 0}))
     return jsonify({'result': 'success', 'msg': 'like', 'tips': tips})

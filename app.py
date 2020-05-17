@@ -61,10 +61,14 @@ def load_tips():
 @app.route('/like', methods=['POST'])
 def like():
     sid = request.form['sid']
-    # print(sid)
-    # likevalue = db.tip.find_one({'sid':sid})
-    db.tip.update({'sid':sid},{'$inc':{'expiration':timedelta(minutes=10)}})
+    # 좋아요 눌렀을 때 like 를 +1
     db.tip.update({'sid': sid}, {'$inc': {'like': 1}})
+    # 현재 만료 시간을 불러온다.
+    lifetime = db.tip.find({'sid':sid},{'_id': 0,'expiration':1})
+    # 만료 시간을 10분 늘린다.
+    addlifetime=list(lifetime)[0]['expiration']+timedelta(minutes=10)
+    # 변경된 만료 시간 db에 업데이트
+    db.tip.update({'sid': sid}, {'$set': {'expiration': addlifetime}})
     tips = list(db.tip.find({'sid': sid}, {'_id': 0}))
     return jsonify({'result': 'success', 'msg': 'like', 'tips': tips})
     # new_like = likevalue['like']+1
@@ -75,6 +79,9 @@ def like():
 def unlike():
     sid = request.form['sid']
     db.tip.update({'sid': sid}, {'$inc': {'unlike': 1}})
+    lifetime = db.tip.find({'sid':sid},{'_id': 0,'expiration':1})
+    addlifetime=list(lifetime)[0]['expiration']-timedelta(minutes=10)
+    db.tip.update({'sid': sid}, {'$set': {'expiration': addlifetime}})
     return jsonify({'result': 'success', 'msg': 'unlike'})
 
 

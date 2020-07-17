@@ -6,10 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/static/images/favicon.png">
     <title>꿀팁!</title>
+    <!-- icon -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/static/css/customstyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/customjs.js"></script>
+
+    <!-- font -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 </head>
 
@@ -21,19 +27,19 @@
             <a href="/"><img class="logo_img" src="/static/images/logo.png"></a>
         </div>
         <ul class="notice-list">
-            <li>
+            <li class="notice">
                 50글자로 여러분만의 꿀팁을 여러 사람들에게 공유해보세요
             </li>
-            <li>
+            <li class="notice">
                 올려주신 꿀팁은 24시간 후 자동으로 삭제 됩니다
             </li>
-            <li>
+            <li class="notice">
                 &#x1F44D 1개당 생명력이 10분 늘어납니다.
             </li>
-            <li>
+            <li class="notice">
                 &#x1F44E 1개당 생명력이 10분 줄어듭니다.
             </li>
-            <li>
+            <li class="notice">
                 추가 기능을 개발중입니다
             </li>
         </ul>
@@ -196,7 +202,7 @@
 
         function reloadTipList(tips, sid, like, unlike, expiration) {
             $('#like' + sid).text(like)
-          }
+        }
     </script>
 
 </body>

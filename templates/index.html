@@ -146,7 +146,7 @@
             var del_time = parseInt((ex.getTime() - now.getTime()) / 1000 / 60 / 60)
             var del_minute = parseInt(((ex.getTime() - now.getTime()) / 1000 / 60) % 60)
             const tipLists = `<li class="list-group-item d-flex justify-content-between align-items-center">
-        <div class="tip-content">
+        <div class="tip-content" id="tip_${sid}">
             ${tips}
         </div>
         <div class="del-time">
@@ -172,7 +172,8 @@
                 success: function (response) {
                     let tip = response['tips'];
                     // Refresh_btn(tip['sid'],tip['like'])
-                    loadTipsList()
+                    // loadTipsList()
+                    reloadTipList()
                 }
             })
 
@@ -192,6 +193,10 @@
             })
 
         }
+
+        function reloadTipList(tips, sid, like, unlike, expiration) {
+            $('#like' + sid).text(like)
+          }
     </script>
 
 </body>

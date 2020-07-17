@@ -12,18 +12,18 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# HOST = 'localhost'
-# client = MongoClient(HOST, 27017)
-HOST = os.getenv('HOST', '0.0.0.0')
-USERNAME = os.getenv('USERNAME')
-PASSWORD = os.getenv('PASSWORD')
+HOST = 'localhost'
+client = MongoClient(HOST, 27017)
+# HOST = os.getenv('HOST', '0.0.0.0')
+# USERNAME = os.getenv('USERNAME')
+# PASSWORD = os.getenv('PASSWORD')
 
 
-client = MongoClient(HOST,
-                     27017,
-                     username=USERNAME,
-                     password=PASSWORD,
-                     authMechanism='SCRAM-SHA-1')
+# client = MongoClient(HOST,
+#                      27017,
+#                      username=USERNAME,
+#                      password=PASSWORD,
+#                      authMechanism='SCRAM-SHA-1')
 
 
 db = client.honeytips
@@ -86,4 +86,4 @@ def unlike():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug='Ture')
+    app.run(host='localhost', port=5000, debug='Ture')

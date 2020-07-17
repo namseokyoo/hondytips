@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/images/favicon.png">
+    <title>BAAAM!</title>
+    <!-- icon -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/customstyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/customjs.js"></script>
+
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <div class="content-wrap">
+        <!-- <div class='top'> -->
+        <div class="thumbnail-wrappper">
+            <a href="/baaam"><img class="baaamlogo_img" src="/static/images/BAAAM.png"></a>
+        </div>
+        <ul class="notice-list">
+            <li class="notice">
+                대나무 숲에 온듯 여기서는 속시원히 털어놔 보세요!!
+            </li>
+            <li class="notice">
+                이야기들은 24시간 후 자동으로 삭제 됩니다
+            </li>
+            <li class="notice">
+                &#x1F44D 1개당 생명력이 10분 늘어납니다.
+            </li>
+            <li class="notice">
+                &#x1F44E 1개당 생명력이 10분 줄어듭니다.
+            </li>
+            <li class="notice">
+                추가 기능을 개발중입니다
+            </li>
+        </ul>
+        <!-- </div> -->
+        <!-- <div class="input-box"> -->
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="input_text" placeholder="여기서만큼은 속시원히 털어놔 보세요!"
+                aria-label="Recipient's username" aria-describedby="button-addon2" onkeyup="enterkey()" maxlength="50">
+        </div>
+
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="writeBaaamsList()">BAAAM!</button>
+        <!-- </div> -->
+
+        <!-- 꿀팁 리스트 -->
+        <ul class="list-group" id="baaam_list_group">
+            <!-- listing space -->
+        </ul>
+        <!-- 꿀팁 리스트 -->
+    </div>
+
+
+    <script>
+        // 엔터키 눌렀을때 이벤트 발생하게 하는 함수
+        function enterkey() {
+            if (window.event.keyCode == 13) {
+                // 엔터키가 눌렸을 때 실행할 내용
+                writeBaaamsList();
+            }
+        }
+
+        $(document).ready(function () {
+            // emptylist();
+            loadBaaamsList();
+        })
+
+        function emptylist() {
+            $('#baaam_list_group').empty();
+        }
+
+        $(document).ready(function () {
+            $('#input_text').keyup(function () {
+                if ($(this).val().length > $(this).attr('maxlength')) {
+                    alert('제한길이 초과'); $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+                }
+            });
+        });
+
+        function writeBaaamsList() {
+            const baaams = $("#input_text").val()
+            if (baaams == "") {
+                alert('이야기를 입력해주세요!')
+            } else {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/write_baaams',
+                    data: {
+                        baaams
+                    },
+                    success: function (response) {
+                        let msg = response.msg
+                        // alert(msg)
+                    }
+                })
+                $("#input_text").val('')
+                loadBaaamsList()
+            };
+
+        }
+
+        function Refresh_btn(sid, btn) {
+            $('#' + sid).text(btn);
+        }
+
+        function loadBaaamsList() {
+            emptylist()
+            $.ajax({
+                type: 'GET',
+                url: '/load_baaams',
+                data: {},
+                success: function (response) {
+                    let baaam = response['baaams'];
+                    for (i = 0; i < baaam.length; i++) {
+                        let baaams = response.baaams[i];
+                        // console.log(baaams['sid']);
+                        // console.log(baaams['expiration']);
+                        // console.log(baaams['baaam']);
+                        makeBaaamsList(
+                            baaams['baaam'],
+                            baaams['sid'],
+                            baaams['like'],
+                            baaams['unlike'],
+                            baaams['expiration']
+                        );
+                    }
+                }
+            })
+        }
+        function calculus(Date) {
+            var end_ymd = "2019.03.22";
+            var yyyy = end_ymd.substr(0, 4);
+            var mm = end_ymd.substr(5, 2);
+            var dd = end_ymd.substr(8, 2);
+            var com_ymd = new Date(yyyy, mm - 1, dd);
+            alert("결과 : " + com_ymd + "/ 월(月) : " + (com_ymd.getMonth() + 1));
+        }
+        function makeBaaamsList(baaams, sid, like, unlike, expiration) {
+            var now = new Date();
+            var ex = new Date(expiration);
+            var del_time = parseInt((ex.getTime() - now.getTime()) / 1000 / 60 / 60)
+            var del_minute = parseInt(((ex.getTime() - now.getTime()) / 1000 / 60) % 60)
+            const baaamLists = `<li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="tip-content" id="baaam_${sid}">
+            ${baaams}
+        </div>
+        <div class="del-time">
+            남은생명력 : ${del_time}시간${del_minute}분
+        </div>
+        <span class="badge badge-primary badge-pill" onclick="like('${sid}'); return false;"
+            style="cursor: pointer">&#x1F44D; <div class="thumb" id="like_${sid}">${like}</div></span>
+        <span class="badge badge-primary badge-pill" onclick="unlike('${sid}'); return false;"
+            style="cursor: pointer">&#x1F44E; <div class="thumb" id="unlike_${sid}">${unlike}</div></span>
+    </li>`
+
+            $('#baaam_list_group').prepend(baaamLists)
+        }
+
+        function like(sid) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/like',
+                data: {
+                    sid
+                },
+                success: function (response) {
+                    let baaam = response['baaams'];
+                    // Refresh_btn(baaam['sid'],baaam['like'])
+                    // loadBaaamsList()
+                    reloadBaaamList()
+                }
+            })
+
+        }
+
+        function unlike(sid) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/unlike',
+                data: {
+                    sid
+                },
+                success: function (response) {
+                    loadBaaamsList()
+                }
+            })
+
+        }
+
+        function reloadBaaamList(baaams, sid, like, unlike, expiration) {
+            $('#like' + sid).text(like)
+        }
+    </script>
+
+</body>
+
+</html>

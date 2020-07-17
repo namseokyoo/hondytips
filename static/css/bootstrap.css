@@ -2787,7 +2787,7 @@ a.btn.disabled, fieldset:disabled a.btn {
 
 .btn-block {
     display: block;
-    width: 100px;
+    width: 150px;
     margin: 0 auto;
 }
 

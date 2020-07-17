@@ -58,6 +58,14 @@ ul {
     margin-bottom: 20px;
 }
 
+.baaamlogo_img {
+    width: 200px;
+    /* height: auto; */
+    float: left;
+    margin-top: 50px ;
+    margin-bottom: 50px;
+}
+
 .input-box {
     position: relative;
     flex: 1 1 auto;
@@ -165,7 +173,7 @@ ul {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 32px;
+    font-size: 35px;
     cursor: pointer;
 }
 
@@ -249,5 +257,6 @@ ul {
         display: block;
         padding: 0 20px;
         color: black;
+        font-size: 20px;
     }
 }
